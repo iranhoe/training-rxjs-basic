@@ -9,6 +9,8 @@
         "package.json": true,
         "tsconfig.json": true,
         "webpack.config.js": true,
+        "webpack.test.js": true,
+        "README.md": true,
         ".gitignore": true
     }
 }
