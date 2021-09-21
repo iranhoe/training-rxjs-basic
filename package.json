@@ -2,7 +2,9 @@
   "scripts": {
     "watch": "webpack --watch",
     "start": "webpack serve --live-reload",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "webpack --config ./webpack.test.config.js",
+    "test:watch": "webpack --watch --config ./webpack.test.config.js"
   },
   "dependencies": {
     "lodash": "^4.17.21",
@@ -17,6 +19,9 @@
   "devDependencies": {
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
+    "karma": "^6.3.4",
+    "karma-cli": "^2.0.0",
+    "karma-webpack": "^5.0.0",
     "mini-css-extract-plugin": "^2.3.0",
     "sass": "^1.41.1",
     "sass-loader": "^12.1.0",

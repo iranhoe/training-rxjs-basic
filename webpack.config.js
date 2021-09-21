@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   mode: 'development',
   entry: {
-    debugger: ['./src/scripts/debugger.js', './styles/styles/debugger.css'],
+    debugger: ['./src/scripts/debugger.js', './src/styles/debugger.scss'],
     index: ['./src/scripts/index.js', './src/styles/main.scss']
   },
   target: 'web',

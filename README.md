@@ -39,6 +39,6 @@ I have added one recommended extension for this project only. The [JavaScript De
 
 ## TODO
 
-- [ ] Unit Testing
-- [ ] Unit Test Extension
+- [ ] Unit Testing with Webpack
 - [ ] Console in the HTML
+- [ ] Debug Unit Test
