@@ -46,6 +46,11 @@ I have added one recommended extension for this project only. The [JavaScript De
 
 ## TODO
 
-- [ ] Unit Testing with Webpack
-- [ ] Console in the HTML
-- [ ] Debug Unit Test
+- [x] Unit Testing with Webpack
+- [ ] Console in the HTML - Tool for nice web console
+- [x] Debug Unit Test
+- [ ] Typescript
+- [ ] Unit Test Typescript
+- [ ] Remove test code in the javascript and css
+- [ ] Fix unit test
+- [ ] remove unused packages
