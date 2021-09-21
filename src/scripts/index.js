@@ -1,5 +1,5 @@
 import { interval } from "rxjs";
-import { scan, mapTo, filter } from 'rxjs/operators';
+import { scan, mapTo, filter, tap } from 'rxjs/operators';
 
 // elem refs
 const countdown = document.getElementById(
@@ -16,7 +16,8 @@ counter$.pipe(
   mapTo(-1),
   scan((accumulator, current) => {
     return accumulator + current;
-  }, 10),
+  }, 5),
+  tap(console.log),
   filter(value => value >= 0)
 ).subscribe(value => {
   countdown.innerHTML = value;
