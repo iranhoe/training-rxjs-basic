@@ -4,6 +4,7 @@
         "node_modules": true,
         ".vscode": true,
         "package-lock.json": true,
+        "spec": true,
 
         "package.json": true,
         "tsconfig.json": true,

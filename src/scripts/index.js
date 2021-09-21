@@ -1,5 +1,9 @@
 import _ from 'lodash';
-import setupDebugger from './debugger';
+import {setupDebugger, test} from './debugger';
+
+export default function test() {
+  return test();
+}
 
  function component() {
    const element = document.createElement('div');

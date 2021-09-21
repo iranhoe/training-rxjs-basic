@@ -18,6 +18,12 @@ To build the project just press Ctrl+Shift+B this will execute the ```npm start`
 
 To debug the code in VSCode, the extension mention below need to be installed and there is already some Launchers, just press F5 or select one from the VS Code.
 
+### Unit Test
+
+Jasmine is the tool used for unit test. Using VSCode extension [Jasmine Test Explorer](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-jasmine-test-adapter) is possible to debug the unit test
+
+In order to execute the unit test use ```npm run test``` it will create the bundles and execute the unit test or use ```npm run test:watch``` this webpack will check your unit test changes.
+
 ## Workspace
 
 Since some file and folders bother me, I excluded them from the VS Code explorer. if you want to see them, remember that you can enable them by change the [settings.json](./.vscode/settings.json)
@@ -32,6 +38,7 @@ Since some file and folders bother me, I excluded them from the VS Code explorer
 - webpack.config.js
 - .gitignore
 - dist
+- spec
 
 ## Extensions
 

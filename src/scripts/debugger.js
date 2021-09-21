@@ -3,3 +3,7 @@ export default function setupDebugger() {
     console.log("debugger was executed!!!");
 }
 
+export function test(){
+    return 1;
+}
+

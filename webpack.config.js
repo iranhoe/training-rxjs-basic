@@ -5,8 +5,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   mode: 'development',
   entry: {
-    debugger: ['./src/scripts/debugger.js', './src/styles/debugger.scss'],
-    index: ['./src/scripts/index.js', './src/styles/main.scss']
+    debugger: ['./src/scripts/debugger.js', './src/stylesheets/debugger.scss'],
+    index: ['./src/scripts/index.js', './src/stylesheets/main.scss']
   },
   target: 'web',
   devtool: 'inline-source-map',
