@@ -1,4 +1,7 @@
-.hello {
-    color: red;
-    background-color: url('../images/icon.png');
+.progress-bar {
+    position: fixed;
+    top: 0;
+    height: 4px;
+    width: 0%;
+    background: red;
 }

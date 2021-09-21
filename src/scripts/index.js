@@ -1,19 +1,32 @@
+import { fromEvent } from 'rxjs';
+import { map } from 'rxjs/operators'
 import _ from 'lodash';
 
- function component() {
-   const element = document.createElement('div');
-   const btn = document.createElement('button');
+// helpers
+function calculateScrollPercent(element) {
+  const {
+    scrollTop,
+    scrollHeight,
+    clientHeight
+  } = element;
 
-   element.classList.add("hello");
+  return (scrollTop / (scrollHeight - clientHeight)) * 100;
+}
 
-   element.innerHTML = _.join(['Hello iran', 'webpack'], ' ');
+// elems
+const progressBar = document.querySelector(
+  '.progress-bar'
+);
 
-   btn.innerHTML = 'Click me and check the console!';
-   btn.onclick = setupDebugger;
+// streams
+const scroll$ = fromEvent(document, 'scroll');
+const progress$ = scroll$.pipe(
+  // percent progress
+  map(({target}) => calculateScrollPercent(
+    target.documentElement
+  ))
+)
 
-   element.appendChild(btn);
-
-   return element;
- }
-
- document.body.appendChild(component());
+progress$.subscribe(percent => {
+  progressBar.style.width = `${percent}%`;
+});
