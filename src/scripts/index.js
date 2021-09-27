@@ -1,11 +1,9 @@
-import { fromEvent } from "rxjs";
-import { sampleTime, map } from 'rxjs/operators';
+import { fromEvent, interval } from "rxjs";
+import { sample, map } from 'rxjs/operators';
 
 const click$ = fromEvent(document, 'click');
+const timer$ = interval(1000);
 
-click$.pipe(
-    sampleTime(4000),
-    map(({clientX, clientY}) => ({
-        clientX, clientY
-    }))
+timer$.pipe(
+    sample(click$)
 ).subscribe(console.log);
