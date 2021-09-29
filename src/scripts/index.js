@@ -1,20 +1,37 @@
 import { interval, fromEvent } from "rxjs";
+import { ajax } from 'rxjs/ajax';
 import { debounceTime, 
     pluck, 
     distinctUntilChanged, 
-    debounce } from "rxjs/operators";
+    switchMap
+} from "rxjs/operators";
+
+const BASE_URL = 'https://api.openbrewerydb.org/breweries';
 
 // elems
 const inputBox = document.getElementById(
     'text-input'
 );
 
+const typeaheadContainer = document.getElementById(
+    'typeahead-container'
+)
+
 // streams
-const click$ = fromEvent(document, 'click');
 const input$ = fromEvent(inputBox, 'keyup');
 
 input$.pipe(
-    debounce(() => interval(1000)),
+    debounceTime(200),
     pluck('target', 'value'),
-    distinctUntilChanged()
-).subscribe(console.log);
+    distinctUntilChanged(),
+    switchMap(searchTerm => {
+        return ajax.getJSON(
+            `${BASE_URL}?by_name=${searchTerm}`
+        )
+    })
+).subscribe(response => {
+    // update ui
+    typeaheadContainer.innerHTML = response.map(
+        b => b.name
+    ).join('<br>');
+});
