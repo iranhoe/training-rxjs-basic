@@ -1,19 +1,14 @@
-import { fromEvent } from "rxjs";
-import { ajax } from "rxjs/ajax";
-import { map, debounceTime, mergeAll, mergeMap } from 'rxjs/operators';
-
-// elems
-const textInput = document.getElementById('text-input');
+import { fromEvent, interval } from "rxjs";
+import { mergeMap, takeUntil } from 'rxjs/operators';
 
 // streams
-const input$ = fromEvent(textInput, 'keyup');
+const click$ = fromEvent(document, 'click');
+const mousedown$ = fromEvent(document, 'mousedown');
+const mouseup$ = fromEvent(document, 'mouseup');
+const interval$ = interval(1000);
 
-input$.pipe(
-    debounceTime(200),
-    mergeMap(event => {
-        const term = event.target.value
-        return ajax.getJSON(
-            `https://api.github.com/users/${term}` 
-        )
-    })
+mousedown$.pipe(
+    mergeMap(() => interval$.pipe(
+        takeUntil(mouseup$)
+    ))
 ).subscribe(console.log);
