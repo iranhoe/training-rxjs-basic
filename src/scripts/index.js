@@ -1,9 +1,25 @@
-import { fromEvent, interval } from "rxjs";
-import { concatMap, take  } from "rxjs/operators";
+import { of, fromEvent } from "rxjs";
+import { delay, concatMap } from "rxjs/operators";
 
-const interval$ = interval(1000);
-const click$ = fromEvent(document, 'click');
+const saveAnswer = answer => {
+    // simulate delay request
+    return of(`Saved: ${answer}`).pipe(
+        delay(1500)
+    );
+}
 
-click$.pipe(
-    concatMap(() => interval$.pipe(take(3)))
+// elems
+const radioButtons = document.querySelectorAll(
+    '.radio-option'
+);
+
+// stream
+const answerChange$ = fromEvent(
+    radioButtons, 'click'
+);
+
+answerChange$.pipe(
+    concatMap(event => saveAnswer(
+        event.target.value
+    ))
 ).subscribe(console.log);
