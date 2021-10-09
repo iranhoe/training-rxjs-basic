@@ -1,4 +1,4 @@
-import { fromEvent, empty } from "rxjs";
+import { fromEvent, EMPTY } from "rxjs";
 import { ajax } from 'rxjs/ajax';
 import { 
     debounceTime,
@@ -23,9 +23,9 @@ input$.pipe(
         return ajax.getJSON(
             `${BASE_URL}?by_name=${searchTerm}`
         ).pipe(
-            catchError(error => {
+            catchError((error, caught) => {
                 // throw, return obs
-                return empty()
+                return caught
             })
         )
     })
