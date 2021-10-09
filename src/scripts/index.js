@@ -1,9 +1,23 @@
-import { fromEvent, interval } from "rxjs";
-import { exhaustMap,  take } from 'rxjs/operators';
+import { ajax } from 'rxjs/ajax';
+import { fromEvent } from "rxjs";
+import { exhaustMap } from 'rxjs/operators';
 
-const interval$ = interval(1000);
-const clicks$ = fromEvent(document, 'click');
+const authenticateUser = () => {
+    return ajax.post(
+        'https://reqres.in/api/login',
+        {
+            email: 'eve.holt@reqres.in',
+            password: 'cityslicka'
+        }
+    )
+}
 
-clicks$.pipe(
-    exhaustMap(() => interval$.pipe(take(3)))
+// elems
+const loginButton = document.getElementById("login");
+
+// streams
+const login$ = fromEvent(loginButton, 'click');
+
+login$.pipe(
+    exhaustMap(() => authenticateUser())
 ).subscribe(console.log);
