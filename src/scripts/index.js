@@ -1,4 +1,4 @@
-import { fromEvent, combineLatest } from "rxjs";
+import { fromEvent, interval, combineLatest, withLatestFrom } from "rxjs";
 import { map, filter } from 'rxjs/operators';
 
 // elems
@@ -15,6 +15,10 @@ const keyupAsValue = elem => {
         map(event => event.target.valueAsNumber)
     )
 };
+
+click$.pipe(
+    withLatestFrom(interval(1000))
+).subscribe(console.log);
 
 combineLatest(
     keyupAsValue(first),
