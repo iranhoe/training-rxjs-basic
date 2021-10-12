@@ -1,9 +1,28 @@
-import { of } from "rxjs";
-import { startWith, endWith } from "rxjs/operators";
+import { fromEvent, interval } from 'rxjs';
+import { mapTo, scan, takeWhile, takeUntil, startWith } from 'rxjs/operators'
 
-const numbers$ = of(1,2,3);
+// elem refs
+const countdown = document.getElementById('countdown');
+const message = document.getElementById('message');
+const abortButton = document.getElementById('abort');
 
-numbers$.pipe(
-    startWith('a', 'b', 'c'),
-    endWith('a', 'b', 'c')
-).subscribe(console.log);
+// streams 
+const counter$ = interval(1000);
+const abortClick$ = fromEvent(abortButton, 'click')
+
+const COUNTDOWN_FROM = 20;
+
+counter$.pipe(
+    mapTo(-1),
+    scan((accumulator, current) => {
+        return accumulator + current;
+    }, COUNTDOWN_FROM),
+    takeWhile(value => value >= 0),
+    takeUntil(abortClick$),
+    startWith(COUNTDOWN_FROM)
+).subscribe(value => {
+    countdown.innerHTML = value;
+    if (!value) {
+        message.innerHTML = 'Liftoff!';
+    }
+})
