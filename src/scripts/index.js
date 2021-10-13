@@ -1,12 +1,13 @@
-import { of, forkJoin } from "rxjs";
-import { delay } from "rxjs/operators";
+import { forkJoin } from "rxjs";
+import { ajax } from "rxjs/ajax";
 
-
-// streams
-const numbers$ = of(1,2,3);
-const letters$ = of('a', 'b', 'c');
+const GITHUB_API_BASE = 'https://api.github.com';
 
 forkJoin({
-    numbers: numbers$,
-    latters: letters$.pipe(delay(3000))
-}).subscribe(console.log);
+    user: ajax.getJSON(
+        `${GITHUB_API_BASE}/users/reactivex`
+    ),
+    repo: ajax.getJSON(
+        `${GITHUB_API_BASE}/users/reactivex/repos`
+    )
+}).subscribe(console.log)
